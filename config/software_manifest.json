@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "name": "Docker Desktop (Click + Install)",
+      "task_type": "click_install",
+      "description": "Open Docker Desktop download page and install via GUI. Optional command can install via winget.",
+      "url": "https://www.docker.com/products/docker-desktop/",
+      "notes": "If using GUI: download installer -> next -> next -> finish. Reboot if prompted.",
+      "commands": [
+        "winget install -e --id Docker.DockerDesktop --accept-package-agreements --accept-source-agreements"
+      ]
+    },
+    {
+      "name": "Git Installation by CLI",
+      "task_type": "cli_install",
+      "description": "Install Git using winget and verify version.",
+      "commands": [
+        "winget install -e --id Git.Git --accept-package-agreements --accept-source-agreements",
+        "git --version"
+      ]
+    },
+    {
+      "name": "Node.js Setup by CLI",
+      "task_type": "cli_setup",
+      "description": "Install Node.js LTS and validate npm.",
+      "commands": [
+        "winget install -e --id OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements",
+        "node --version",
+        "npm --version"
+      ]
+    },
+    {
+      "name": "Copy Runtime Template File",
+      "task_type": "copy_files",
+      "description": "Copy base runtime env file to execution folder.",
+      "source": "execution_files/template.env",
+      "destination": "runtime/.env"
+    },
+    {
+      "name": "System Configuration Setup",
+      "task_type": "system_config",
+      "description": "Set machine-level AGENT_HOME variable and verify.",
+      "commands": [
+        "[Environment]::SetEnvironmentVariable('AGENT_HOME', 'C:\\\\AgentHome', 'Machine')",
+        "$env:AGENT_HOME='C:\\\\AgentHome'",
+        "Write-Output \"AGENT_HOME=$env:AGENT_HOME\""
+      ]
+    }
+  ]
+}
